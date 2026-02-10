@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Thanos Scroll Snap</title>
+<title>Scroll Snap Apocalypse</title>
 <style>
 body {
   margin: 0;
@@ -13,16 +13,18 @@ body {
 }
 
 section {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 80px;
-  position: relative;
+  min-height: 100vh;
+  padding: 120px 80px;
+  font-size: 26px;
+  line-height: 1.6;
 }
 
 #snap-section {
   position: relative;
+}
+
+#target {
+  max-width: 900px;
 }
 
 canvas {
@@ -36,16 +38,46 @@ canvas {
 <body>
 
 <section>
-  Scroll Down
+  <h1>Scroll Down Slowly...</h1>
+  <p>
+  This is not just text. This is existence. This is structure. This is digital matter.
+  Keep scrolling and watch what happens to half of reality.
+  </p>
 </section>
 
 <section id="snap-section">
-  <div id="target">I DON'T FEEL SO GOOD...</div>
+  <div id="target">
+    <h2>The Collapse Begins</h2>
+    <p>
+    Everything you see here will not survive. Systems fail. Structures dissolve.
+    Words lose meaning. Lines fade. Presence becomes memory.
+    </p>
+    <p>
+    This paragraph represents stability. Or at least it tries to.
+    But nothing is stable. Nothing is permanent.
+    </p>
+    <p>
+    The wind is coming from the left.
+    The particles will drift.
+    The dust will glow.
+    And half of this digital world will turn into ash.
+    </p>
+    <p>
+    Scroll further.
+    Watch carefully.
+    </p>
+  </div>
   <canvas id="canvas"></canvas>
 </section>
 
 <section>
-  This Part Survives.
+  <h2>This Section Survives.</h2>
+  <p>
+  The snap only erased half the page.
+  The rest remains.
+  Silent.
+  Untouched.
+  </p>
 </section>
 
 <script>
@@ -59,15 +91,17 @@ canvas.height = window.innerHeight;
 
 let particles = [];
 let snapped = false;
+let progress = 0;
 
 function createParticles() {
   const rect = target.getBoundingClientRect();
 
-  ctx.font = "80px Arial";
+  ctx.font = "26px Arial";
   ctx.fillStyle = "white";
-  ctx.fillText(target.innerText, rect.left, rect.top + 80);
+  ctx.fillText(target.innerText, rect.left, rect.top + 40);
 
   const imageData = ctx.getImageData(rect.left, rect.top, rect.width, rect.height);
+
   target.style.visibility = "hidden";
 
   for (let y = 0; y < imageData.height; y += 4) {
@@ -76,15 +110,13 @@ function createParticles() {
       const index = (y * imageData.width + x) * 4;
       const alpha = imageData.data[index + 3];
 
-      // LEFT → RIGHT dissolve control
       if (alpha > 150 && x < imageData.width * progress) {
         particles.push({
           x: rect.left + x,
           y: rect.top + y,
-          vx: Math.random() * 3 + 1,  // WIND RIGHT
+          vx: Math.random() * 4 + 1,
           vy: (Math.random() - 0.5) * 2,
-          alpha: 1,
-          glow: Math.random() * 0.5 + 0.5
+          alpha: 1
         });
       }
     }
@@ -97,18 +129,16 @@ function animate() {
   particles.forEach(p => {
     p.x += p.vx;
     p.y += p.vy;
-    p.alpha -= 0.01;
+    p.alpha -= 0.008;
 
-    ctx.fillStyle = `rgba(255, 200, 150, ${p.alpha})`;
-    ctx.shadowBlur = 10;
+    ctx.fillStyle = `rgba(255,180,120,${p.alpha})`;
+    ctx.shadowBlur = 15;
     ctx.shadowColor = "orange";
     ctx.fillRect(p.x, p.y, 3, 3);
   });
 
   requestAnimationFrame(animate);
 }
-
-let progress = 0;
 
 window.addEventListener("scroll", () => {
   const rect = section.getBoundingClientRect();
@@ -118,7 +148,7 @@ window.addEventListener("scroll", () => {
   }
 
   if (snapped && progress < 1) {
-    progress += 0.02; // dissolve speed
+    progress += 0.015;
     createParticles();
   }
 });
