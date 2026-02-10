@@ -2,13 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dragon Cursor</title>
+<title>Code Anime Girl</title>
 <style>
 body {
   margin: 0;
-  background: black;
+  background: radial-gradient(circle at center, #111, #000);
   overflow: hidden;
-  cursor: none;
 }
 canvas {
   display: block;
@@ -26,74 +25,60 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
-let segments = [];
-let fireParticles = [];
+let time = 0;
+let blinkTimer = 0;
 
-const segmentCount = 40;
+function drawCharacter() {
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2 + Math.sin(time * 0.02) * 10;
 
-// Create dragon body
-for (let i = 0; i < segmentCount; i++) {
-  segments.push({ x: mouse.x, y: mouse.y });
-}
+  // Aura glow
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, 140, 0, Math.PI * 2);
+  ctx.fillStyle = "rgba(120, 0, 255, 0.15)";
+  ctx.fill();
 
-window.addEventListener("mousemove", e => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
+  // Hair sway
+  const hairOffset = Math.sin(time * 0.05) * 8;
 
-// Fire particle
-function createFire(x, y) {
-  fireParticles.push({
-    x: x,
-    y: y,
-    vx: (Math.random() - 0.5) * 2,
-    vy: Math.random() * -2 - 1,
-    alpha: 1,
-    size: Math.random() * 4 + 2
-  });
+  // Hair
+  ctx.beginPath();
+  ctx.arc(centerX, centerY - 60, 100 + hairOffset, Math.PI, 2 * Math.PI);
+  ctx.fillStyle = "#2b0066";
+  ctx.fill();
+
+  // Face
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, 80, 0, Math.PI * 2);
+  ctx.fillStyle = "#ffe0bd";
+  ctx.fill();
+
+  // Eyes
+  blinkTimer++;
+  let eyeHeight = blinkTimer % 200 > 180 ? 2 : 20;
+
+  ctx.fillStyle = "black";
+
+  ctx.beginPath();
+  ctx.ellipse(centerX - 30, centerY - 10, 12, eyeHeight, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.ellipse(centerX + 30, centerY - 10, 12, eyeHeight, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Mouth
+  ctx.beginPath();
+  ctx.arc(centerX, centerY + 30, 15, 0, Math.PI);
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 3;
+  ctx.stroke();
 }
 
 function animate() {
-  ctx.fillStyle = "rgba(0,0,0,0.2)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // Dragon movement (smooth follow)
-  segments[0].x += (mouse.x - segments[0].x) * 0.2;
-  segments[0].y += (mouse.y - segments[0].y) * 0.2;
-
-  for (let i = 1; i < segments.length; i++) {
-    segments[i].x += (segments[i-1].x - segments[i].x) * 0.3;
-    segments[i].y += (segments[i-1].y - segments[i].y) * 0.3;
-  }
-
-  // Draw dragon body
-  for (let i = segments.length - 1; i >= 0; i--) {
-    ctx.beginPath();
-    ctx.arc(segments[i].x, segments[i].y, 10 - i * 0.2, 0, Math.PI * 2);
-    ctx.fillStyle = `hsl(${i * 5}, 100%, 50%)`;
-    ctx.shadowBlur = 20;
-    ctx.shadowColor = "orange";
-    ctx.fill();
-  }
-
-  // Create fire from head
-  createFire(segments[0].x, segments[0].y);
-
-  // Draw fire particles
-  fireParticles.forEach((p, index) => {
-    p.x += p.vx;
-    p.y += p.vy;
-    p.alpha -= 0.02;
-
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255, ${Math.random()*150}, 0, ${p.alpha})`;
-    ctx.fill();
-
-    if (p.alpha <= 0) fireParticles.splice(index, 1);
-  });
-
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawCharacter();
+  time++;
   requestAnimationFrame(animate);
 }
 
