@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Thanos Scroll Snap</title>
+<style>
+body {
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
+  position: relative;
+}
+
+#snap-section {
+  position: relative;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<section>
+  Scroll Down
+</section>
+
+<section id="snap-section">
+  <div id="target">I DON'T FEEL SO GOOD...</div>
+  <canvas id="canvas"></canvas>
+</section>
+
+<section>
+  This Part Survives.
+</section>
+
+<script>
+const section = document.getElementById("snap-section");
+const target = document.getElementById("target");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+let snapped = false;
+
+function createParticles() {
+  const rect = target.getBoundingClientRect();
+
+  ctx.font = "80px Arial";
+  ctx.fillStyle = "white";
+  ctx.fillText(target.innerText, rect.left, rect.top + 80);
+
+  const imageData = ctx.getImageData(rect.left, rect.top, rect.width, rect.height);
+  target.style.visibility = "hidden";
+
+  for (let y = 0; y < imageData.height; y += 4) {
+    for (let x = 0; x < imageData.width; x += 4) {
+
+      const index = (y * imageData.width + x) * 4;
+      const alpha = imageData.data[index + 3];
+
+      // LEFT → RIGHT dissolve control
+      if (alpha > 150 && x < imageData.width * progress) {
+        particles.push({
+          x: rect.left + x,
+          y: rect.top + y,
+          vx: Math.random() * 3 + 1,  // WIND RIGHT
+          vy: (Math.random() - 0.5) * 2,
+          alpha: 1,
+          glow: Math.random() * 0.5 + 0.5
+        });
+      }
+    }
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.alpha -= 0.01;
+
+    ctx.fillStyle = `rgba(255, 200, 150, ${p.alpha})`;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = "orange";
+    ctx.fillRect(p.x, p.y, 3, 3);
+  });
+
+  requestAnimationFrame(animate);
+}
+
+let progress = 0;
+
+window.addEventListener("scroll", () => {
+  const rect = section.getBoundingClientRect();
+
+  if (!snapped && rect.top < window.innerHeight / 2) {
+    snapped = true;
+  }
+
+  if (snapped && progress < 1) {
+    progress += 0.02; // dissolve speed
+    createParticles();
+  }
+});
+
+animate();
+</script>
+
+</body>
+</html>
