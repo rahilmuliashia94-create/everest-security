@@ -2,156 +2,100 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Scroll Snap Apocalypse</title>
+<title>Dragon Cursor</title>
 <style>
 body {
   margin: 0;
   background: black;
-  color: white;
-  font-family: Arial, sans-serif;
-  overflow-x: hidden;
+  overflow: hidden;
+  cursor: none;
 }
-
-section {
-  min-height: 100vh;
-  padding: 120px 80px;
-  font-size: 26px;
-  line-height: 1.6;
-}
-
-#snap-section {
-  position: relative;
-}
-
-#target {
-  max-width: 900px;
-}
-
 canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
+  display: block;
 }
 </style>
 </head>
 <body>
 
-<section>
-  <h1>Scroll Down Slowly...</h1>
-  <p>
-  This is not just text. This is existence. This is structure. This is digital matter.
-  Keep scrolling and watch what happens to half of reality.
-  </p>
-</section>
-
-<section id="snap-section">
-  <div id="target">
-    <h2>The Collapse Begins</h2>
-    <p>
-    Everything you see here will not survive. Systems fail. Structures dissolve.
-    Words lose meaning. Lines fade. Presence becomes memory.
-    </p>
-    <p>
-    This paragraph represents stability. Or at least it tries to.
-    But nothing is stable. Nothing is permanent.
-    </p>
-    <p>
-    The wind is coming from the left.
-    The particles will drift.
-    The dust will glow.
-    And half of this digital world will turn into ash.
-    </p>
-    <p>
-    Scroll further.
-    Watch carefully.
-    </p>
-  </div>
-  <canvas id="canvas"></canvas>
-</section>
-
-<section>
-  <h2>This Section Survives.</h2>
-  <p>
-  The snap only erased half the page.
-  The rest remains.
-  Silent.
-  Untouched.
-  </p>
-</section>
+<canvas id="canvas"></canvas>
 
 <script>
-const section = document.getElementById("snap-section");
-const target = document.getElementById("target");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particles = [];
-let snapped = false;
-let progress = 0;
+let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+let segments = [];
+let fireParticles = [];
 
-function createParticles() {
-  const rect = target.getBoundingClientRect();
+const segmentCount = 40;
 
-  ctx.font = "26px Arial";
-  ctx.fillStyle = "white";
-  ctx.fillText(target.innerText, rect.left, rect.top + 40);
+// Create dragon body
+for (let i = 0; i < segmentCount; i++) {
+  segments.push({ x: mouse.x, y: mouse.y });
+}
 
-  const imageData = ctx.getImageData(rect.left, rect.top, rect.width, rect.height);
+window.addEventListener("mousemove", e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
 
-  target.style.visibility = "hidden";
-
-  for (let y = 0; y < imageData.height; y += 4) {
-    for (let x = 0; x < imageData.width; x += 4) {
-
-      const index = (y * imageData.width + x) * 4;
-      const alpha = imageData.data[index + 3];
-
-      if (alpha > 150 && x < imageData.width * progress) {
-        particles.push({
-          x: rect.left + x,
-          y: rect.top + y,
-          vx: Math.random() * 4 + 1,
-          vy: (Math.random() - 0.5) * 2,
-          alpha: 1
-        });
-      }
-    }
-  }
+// Fire particle
+function createFire(x, y) {
+  fireParticles.push({
+    x: x,
+    y: y,
+    vx: (Math.random() - 0.5) * 2,
+    vy: Math.random() * -2 - 1,
+    alpha: 1,
+    size: Math.random() * 4 + 2
+  });
 }
 
 function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(0,0,0,0.2)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  particles.forEach(p => {
+  // Dragon movement (smooth follow)
+  segments[0].x += (mouse.x - segments[0].x) * 0.2;
+  segments[0].y += (mouse.y - segments[0].y) * 0.2;
+
+  for (let i = 1; i < segments.length; i++) {
+    segments[i].x += (segments[i-1].x - segments[i].x) * 0.3;
+    segments[i].y += (segments[i-1].y - segments[i].y) * 0.3;
+  }
+
+  // Draw dragon body
+  for (let i = segments.length - 1; i >= 0; i--) {
+    ctx.beginPath();
+    ctx.arc(segments[i].x, segments[i].y, 10 - i * 0.2, 0, Math.PI * 2);
+    ctx.fillStyle = `hsl(${i * 5}, 100%, 50%)`;
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = "orange";
+    ctx.fill();
+  }
+
+  // Create fire from head
+  createFire(segments[0].x, segments[0].y);
+
+  // Draw fire particles
+  fireParticles.forEach((p, index) => {
     p.x += p.vx;
     p.y += p.vy;
-    p.alpha -= 0.008;
+    p.alpha -= 0.02;
 
-    ctx.fillStyle = `rgba(255,180,120,${p.alpha})`;
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = "orange";
-    ctx.fillRect(p.x, p.y, 3, 3);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, ${Math.random()*150}, 0, ${p.alpha})`;
+    ctx.fill();
+
+    if (p.alpha <= 0) fireParticles.splice(index, 1);
   });
 
   requestAnimationFrame(animate);
 }
-
-window.addEventListener("scroll", () => {
-  const rect = section.getBoundingClientRect();
-
-  if (!snapped && rect.top < window.innerHeight / 2) {
-    snapped = true;
-  }
-
-  if (snapped && progress < 1) {
-    progress += 0.015;
-    createParticles();
-  }
-});
 
 animate();
 </script>
