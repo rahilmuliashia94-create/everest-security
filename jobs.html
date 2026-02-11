@@ -5,6 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jobs | OSTC International Recruitment</title>
 <link rel="stylesheet" href="style.css">
+
+<style>
+/* FILTER LAYOUT */
+.jobs-wrapper {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  padding: 60px 10%;
+}
+
+.job-filter {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 14px;
+  border: 1px solid #e5e5e5;
+  height: fit-content;
+}
+
+.job-filter h3 {
+  margin-bottom: 20px;
+  color: #d4af37;
+}
+
+.job-filter label {
+  display: block;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+@media (max-width: 900px) {
+  .jobs-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -25,143 +62,99 @@
   <p>All positions are verified and legally compliant.</p>
 </section>
 
-<section class="section">
-  <div class="grid">
+<section>
+  <div class="jobs-wrapper">
 
-    <!-- FEATURED JOB -->
-    <div class="card featured-job">
-      <div class="badge-new">FEATURED</div>
-      <h3>🇮🇱 Israel – Steel Fixer</h3>
-      <p><strong>Job ID:</strong> IL-SF-1024</p>
-      <p><strong>Salary:</strong> ₹1,50,000 – ₹1,80,000 per month</p>
-      <p class="slots">Only 12 positions left</p>
-      <p class="countdown" id="countdown1"></p>
-      <button class="btn" onclick="applyJob('Israel','Steel Fixer')">
-        Apply Now
-      </button>
+    <!-- FILTER SIDEBAR -->
+    <div class="job-filter">
+      <h3>Filter by Country</h3>
+
+      <label>
+        <input type="checkbox" class="country-filter" value="Israel">
+        Israel
+      </label>
+
+      <label>
+        <input type="checkbox" class="country-filter" value="Czech Republic">
+        Czech Republic
+      </label>
+
+      <label>
+        <input type="checkbox" class="country-filter" value="Malta">
+        Malta
+      </label>
     </div>
 
-    <!-- CAR MECHANIC -->
-    <div class="card">
-      <h3>🇮🇱 Israel – Car Mechanic</h3>
-      <p><strong>Job ID:</strong> IL-CM-2041</p>
-      <p><strong>Salary:</strong> ₹1,20,000 – ₹1,60,000 per month</p>
-      <p class="slots">Only 8 positions left</p>
-      <p class="countdown" id="countdown2"></p>
-      <button class="btn" onclick="applyJob('Israel','Car Mechanic')">
-        Apply Now
-      </button>
-    </div>
+    <!-- JOB GRID -->
+    <div class="grid">
 
-    <!-- WAREHOUSE -->
-    <div class="card">
-      <h3>🇨🇿 Czech Republic – Warehouse Worker</h3>
-      <p><strong>Job ID:</strong> CZ-WH-3302</p>
-      <p><strong>Salary:</strong> €1,300 – €1,600 per month</p>
-      <p class="slots">Only 15 positions left</p>
-      <p class="countdown" id="countdown3"></p>
-      <button class="btn" onclick="applyJob('Czech Republic','Warehouse Worker')">
-        Apply Now
-      </button>
-    </div>
+      <!-- FEATURED JOB -->
+      <div class="card job-card featured-job" data-country="Israel">
+        <div class="badge-new">FEATURED</div>
+        <h3>🇮🇱 Israel – Steel Fixer</h3>
+        <p><strong>Job ID:</strong> IL-SF-1024</p>
+        <p><strong>Salary:</strong> ₹1,50,000 – ₹1,80,000 per month</p>
+        <p class="slots">Only 12 positions left</p>
+        <p class="countdown" id="countdown1"></p>
+        <button class="btn" onclick="applyJob('Israel','Steel Fixer')">
+          Apply Now
+        </button>
+      </div>
 
-    <!-- MALTA -->
-    <div class="card">
-      <div class="badge-new">NEW</div>
-      <h3>🇲🇹 Malta – Car Body Sprayer</h3>
-      <p><strong>Job ID:</strong> MT-CB-4411</p>
-      <p><strong>Salary:</strong> €1,800 – €2,200 per month</p>
-      <p class="slots">Only 5 positions left</p>
-      <p class="countdown" id="countdown4"></p>
-      <button class="btn" onclick="applyJob('Malta','Car Body Sprayer')">
-        Apply Now
-      </button>
+      <!-- CAR MECHANIC -->
+      <div class="card job-card" data-country="Israel">
+        <h3>🇮🇱 Israel – Car Mechanic</h3>
+        <p><strong>Job ID:</strong> IL-CM-2041</p>
+        <p><strong>Salary:</strong> ₹1,20,000 – ₹1,60,000 per month</p>
+        <p class="slots">Only 8 positions left</p>
+        <p class="countdown" id="countdown2"></p>
+        <button class="btn" onclick="applyJob('Israel','Car Mechanic')">
+          Apply Now
+        </button>
+      </div>
+
+      <!-- WAREHOUSE -->
+      <div class="card job-card" data-country="Czech Republic">
+        <h3>🇨🇿 Czech Republic – Warehouse Worker</h3>
+        <p><strong>Job ID:</strong> CZ-WH-3302</p>
+        <p><strong>Salary:</strong> €1,300 – €1,600 per month</p>
+        <p class="slots">Only 15 positions left</p>
+        <p class="countdown" id="countdown3"></p>
+        <button class="btn" onclick="applyJob('Czech Republic','Warehouse Worker')">
+          Apply Now
+        </button>
+      </div>
+
+      <!-- MALTA -->
+      <div class="card job-card" data-country="Malta">
+        <div class="badge-new">NEW</div>
+        <h3>🇲🇹 Malta – Car Body Sprayer</h3>
+        <p><strong>Job ID:</strong> MT-CB-4411</p>
+        <p><strong>Salary:</strong> €1,800 – €2,200 per month</p>
+        <p class="slots">Only 5 positions left</p>
+        <p class="countdown" id="countdown4"></p>
+        <button class="btn" onclick="applyJob('Malta','Car Body Sprayer')">
+          Apply Now
+        </button>
+      </div>
+
     </div>
 
   </div>
 </section>
 
 <footer class="main-footer">
-
   <div class="footer-container">
-
-    <!-- LEFT BRAND COLUMN -->
     <div class="footer-brand">
       <h3>On Service Travel Consultants</h3>
       <p>Global Workforce Recruitment & Deployment</p>
       <p>🇮🇳 Based in India, hiring globally</p>
     </div>
-
-    <!-- SERVICES -->
-    <div class="footer-col">
-      <h4>Services</h4>
-      <ul>
-        <li>Overseas Recruitment</li>
-        <li>Trade Testing</li>
-        <li>Visa Processing</li>
-        <li>Employer Workforce Solutions</li>
-        <li>Pre-Departure Orientation</li>
-      </ul>
-    </div>
-
-    <!-- INDUSTRIES -->
-    <div class="footer-col">
-      <h4>Industries</h4>
-      <ul>
-        <li>Construction</li>
-        <li>Manufacturing</li>
-        <li>Logistics</li>
-        <li>Automotive</li>
-        <li>Agriculture</li>
-      </ul>
-    </div>
-
-    <!-- COMPANY -->
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="about.html">About</a></li>
-        <li><a href="countries.html">Countries</a></li>
-        <li><a href="jobs.html">Vacancies</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-
-    <!-- CONTACT -->
-    <div class="footer-col footer-contact">
-      <h4>Contact</h4>
-
-      <div class="contact-row">
-        <div>
-          <strong>Email</strong>
-          <p><a href="mailto:info@onservicetravel.com">info@onservicetravel.com</a></p>
-        </div>
-
-        <div>
-          <strong>Phone</strong>
-          <p><a href="tel:+919624001714">+91 9624001714</a></p>
-        </div>
-      </div>
-
-      <div class="footer-address">
-        <strong>Head Office:</strong>
-        <p>
-          “Everest House”<br>
-          Between Mavdi Circle & Gondal Circle,<br>
-          150 Feet Ring Road,<br>
-          Rajkot – 360 004,<br>
-          Gujarat, India
-        </p>
-      </div>
-
-    </div>
-
   </div>
 
   <div class="footer-bottom">
-    © 2026 On Service Travel Consultants (OSTC) | Ethical & Legal Overseas Recruitment
+    © 2026 On Service Travel Consultants (OSTC)
   </div>
-
 </footer>
 
 <script>
@@ -171,22 +164,45 @@ function applyJob(country, job) {
   window.location.href = "contact.html";
 }
 
-/* Simple countdown system */
+/* Countdown */
 function setCountdown(elementId, deadline) {
   const endDate = new Date(deadline).getTime();
   const now = new Date().getTime();
   const distance = endDate - now;
-
   const days = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
 
   document.getElementById(elementId).innerText =
     "Application closes in " + days + " days";
 }
 
-setCountdown("countdown1", "2026-4-1");
-setCountdown("countdown2", "2026-3-2");
-setCountdown("countdown3", "2026-2-3");
-setCountdown("countdown4", "2026-2-2");
+setCountdown("countdown1", "2026-04-01");
+setCountdown("countdown2", "2026-03-02");
+setCountdown("countdown3", "2026-02-03");
+setCountdown("countdown4", "2026-02-02");
+
+/* FILTER SYSTEM */
+const filters = document.querySelectorAll('.country-filter');
+const jobCards = document.querySelectorAll('.job-card');
+
+filters.forEach(filter => {
+  filter.addEventListener('change', () => {
+
+    const selected = Array.from(filters)
+      .filter(f => f.checked)
+      .map(f => f.value);
+
+    jobCards.forEach(card => {
+      const country = card.getAttribute('data-country');
+
+      if (selected.length === 0 || selected.includes(country)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+  });
+});
 </script>
 
 </body>
