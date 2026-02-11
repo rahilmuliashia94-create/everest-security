@@ -34,14 +34,13 @@
 }
 
 .clear-btn {
-  margin-top: 15px;
+  margin-top: 10px;
   padding: 8px 14px;
   border: 1px solid #d4af37;
   background: transparent;
   color: #d4af37;
   cursor: pointer;
   border-radius: 6px;
-  transition: 0.3s;
 }
 
 .clear-btn:hover {
@@ -49,10 +48,43 @@
   color: #000;
 }
 
-.job-count {
+.job-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
+}
+
+.job-count {
   font-weight: 600;
   color: #d4af37;
+}
+
+.sort-select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #e5e5e5;
+}
+
+.badge-featured {
+  background: #d4af37;
+  color: #000;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.badge-urgent {
+  background: #e63946;
+  color: #fff;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: 5px;
 }
 
 .fade-out {
@@ -74,7 +106,6 @@
   }
 }
 </style>
-
 </head>
 <body>
 
@@ -101,44 +132,62 @@
   <!-- FILTER -->
   <div class="job-filter">
     <h3>Filter by Country</h3>
-
     <label><input type="checkbox" class="country-filter" value="Israel"> Israel</label>
     <label><input type="checkbox" class="country-filter" value="Germany"> Germany</label>
     <label><input type="checkbox" class="country-filter" value="Poland"> Poland</label>
-    <label><input type="checkbox" class="country-filter" value="Czech Republic"> Czech Republic</label>
     <label><input type="checkbox" class="country-filter" value="Malta"> Malta</label>
 
     <button class="clear-btn" id="clearFilters">Clear Filters</button>
   </div>
 
-  <!-- JOB GRID -->
+  <!-- JOB AREA -->
   <div>
-    <div class="job-count" id="jobCount"></div>
 
-    <div class="grid">
+    <div class="job-top-bar">
+      <div class="job-count" id="jobCount"></div>
+      <select class="sort-select" id="sortSelect">
+        <option value="default">Sort By</option>
+        <option value="az">A – Z</option>
+        <option value="newest">Newest</option>
+      </select>
+    </div>
 
-      <!-- ISRAEL -->
-      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Steel Fixer</h3><button class="btn" onclick="applyJob('Israel','Steel Fixer')">Apply Now</button></div>
-      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Car Mechanic</h3><button class="btn" onclick="applyJob('Israel','Car Mechanic')">Apply Now</button></div>
-      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 JCB Driver</h3><button class="btn" onclick="applyJob('Israel','JCB Driver')">Apply Now</button></div>
-      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Truck Driver</h3><button class="btn" onclick="applyJob('Israel','Truck Driver')">Apply Now</button></div>
-      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Carpenter</h3><button class="btn" onclick="applyJob('Israel','Carpenter')">Apply Now</button></div>
-      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Furniture Worker</h3><button class="btn" onclick="applyJob('Israel','Furniture Worker')">Apply Now</button></div>
-      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 General Worker</h3><button class="btn" onclick="applyJob('Israel','General Worker')">Apply Now</button></div>
-      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Construction Worker</h3><button class="btn" onclick="applyJob('Israel','Construction Worker')">Apply Now</button></div>
+    <div class="grid" id="jobGrid">
 
-      <!-- GERMANY -->
-      <div class="card job-card fade-in" data-country="Germany"><h3>🇩🇪 Caregiver</h3><button class="btn" onclick="applyJob('Germany','Caregiver')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Israel" data-deadline="2026-04-01">
+        <span class="badge-featured">FEATURED</span>
+        <span class="badge-urgent">URGENT</span>
+        <h3>🇮🇱 Israel – Steel Fixer</h3>
+        <p><strong>Job ID:</strong> IL-SF-1024</p>
+        <p class="slots">Only 12 positions left</p>
+        <p class="countdown"></p>
+        <button class="btn" onclick="applyJob('Israel','Steel Fixer')">Apply Now</button>
+      </div>
 
-      <!-- POLAND -->
-      <div class="card job-card fade-in" data-country="Poland"><h3>🇵🇱 Warehouse Worker</h3><button class="btn" onclick="applyJob('Poland','Warehouse Worker')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Germany" data-deadline="2026-05-01">
+        <h3>🇩🇪 Germany – Caregiver</h3>
+        <p><strong>Job ID:</strong> DE-CG-9001</p>
+        <p class="slots">Only 7 positions left</p>
+        <p class="countdown"></p>
+        <button class="btn" onclick="applyJob('Germany','Caregiver')">Apply Now</button>
+      </div>
 
-      <!-- CZECH -->
-      <div class="card job-card fade-in" data-country="Czech Republic"><h3>🇨🇿 Warehouse Worker</h3><button class="btn" onclick="applyJob('Czech Republic','Warehouse Worker')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Poland" data-deadline="2026-06-01">
+        <span class="badge-urgent">URGENT</span>
+        <h3>🇵🇱 Poland – Warehouse Worker</h3>
+        <p><strong>Job ID:</strong> PL-WH-1102</p>
+        <p class="slots">Only 16 positions left</p>
+        <p class="countdown"></p>
+        <button class="btn" onclick="applyJob('Poland','Warehouse Worker')">Apply Now</button>
+      </div>
 
-      <!-- MALTA -->
-      <div class="card job-card fade-in" data-country="Malta"><h3>🇲🇹 Car Mechanic</h3><button class="btn" onclick="applyJob('Malta','Car Mechanic')">Apply Now</button></div>
-      <div class="card job-card fade-in" data-country="Malta"><h3>🇲🇹 Body Preparation / Car Body Fixing</h3><button class="btn" onclick="applyJob('Malta','Body Preparation Worker')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Malta" data-deadline="2026-03-01">
+        <h3>🇲🇹 Malta – Car Mechanic</h3>
+        <p><strong>Job ID:</strong> MT-CM-1201</p>
+        <p class="slots">Only 4 positions left</p>
+        <p class="countdown"></p>
+        <button class="btn" onclick="applyJob('Malta','Car Mechanic')">Apply Now</button>
+      </div>
 
     </div>
   </div>
@@ -168,6 +217,8 @@ const filters = document.querySelectorAll('.country-filter');
 const jobCards = document.querySelectorAll('.job-card');
 const jobCount = document.getElementById('jobCount');
 const clearBtn = document.getElementById('clearFilters');
+const sortSelect = document.getElementById('sortSelect');
+const jobGrid = document.getElementById('jobGrid');
 
 function updateCount() {
   const visible = Array.from(jobCards).filter(card => card.style.display !== "none");
@@ -181,28 +232,56 @@ function applyFilters() {
 
   jobCards.forEach(card => {
     const country = card.getAttribute('data-country');
-
     if (selected.length === 0 || selected.includes(country)) {
       card.style.display = "block";
-      setTimeout(() => card.classList.remove('fade-out'), 10);
+      card.classList.remove('fade-out');
     } else {
       card.classList.add('fade-out');
       setTimeout(() => card.style.display = "none", 200);
     }
   });
 
-  setTimeout(updateCount, 250);
+  updateCount();
 }
 
-filters.forEach(filter => {
-  filter.addEventListener('change', applyFilters);
-});
-
+filters.forEach(f => f.addEventListener('change', applyFilters));
 clearBtn.addEventListener('click', () => {
   filters.forEach(f => f.checked = false);
   applyFilters();
 });
 
+sortSelect.addEventListener('change', () => {
+  const cardsArray = Array.from(jobCards);
+  if (sortSelect.value === "az") {
+    cardsArray.sort((a,b) => a.innerText.localeCompare(b.innerText));
+  }
+  if (sortSelect.value === "newest") {
+    cardsArray.reverse();
+  }
+  cardsArray.forEach(card => jobGrid.appendChild(card));
+});
+
+function handleCountdowns() {
+  const now = new Date().getTime();
+
+  jobCards.forEach(card => {
+    const deadline = new Date(card.dataset.deadline).getTime();
+    const countdownEl = card.querySelector('.countdown');
+
+    const distance = deadline - now;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    if (days <= 0) {
+      card.style.display = "none";
+    } else {
+      countdownEl.innerText = "Application closes in " + days + " days";
+    }
+  });
+
+  updateCount();
+}
+
+handleCountdowns();
 updateCount();
 </script>
 
