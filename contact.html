@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact OSTC</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">OSTC</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="countries.html">Countries</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="section">
+  <h2>Contact On Service Travel Consultants</h2>
+</section>
+
+<section class="section">
+  <div class="card">
+    <h3>Head Office – Rajkot</h3>
+    <p>
+      Everest House,<br>
+      Between Mavdi & Gondal Circle,<br>
+      150 Feet Ring Road,<br>
+      Rajkot, Gujarat – 360004, India
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Employer Inquiry Form</h2>
+
+  <form id="employerForm" class="card">
+    <input type="text" placeholder="First Name" required>
+    <input type="text" placeholder="Surname" required>
+    <input type="text" placeholder="Company Name" required>
+    <input type="tel" placeholder="Phone Number" required>
+    <input type="email" placeholder="Email Address" required>
+    <input type="text" placeholder="Types of Workers Needed" required>
+    <input type="number" placeholder="Number of Workers Required" required>
+    <textarea placeholder="Additional Information" required></textarea>
+    <button type="submit" class="btn">Send Inquiry</button>
+  </form>
+
+  <div id="employerSuccess" style="display:none; margin-top:20px; color:#d4af37;">
+    OSTC will contact you within 48 hours.
+  </div>
+</section>
+
+<section class="section">
+  <h2>Worker Application Form</h2>
+
+  <form id="workerForm" class="card">
+    <input type="text" placeholder="Full Name (As per Passport)" required>
+    <input type="text" placeholder="Education Qualification" required>
+    <input type="number" placeholder="Age" required>
+    <input type="tel" placeholder="Mobile Number" required>
+    <input type="email" placeholder="Email Address" required>
+
+    <input type="text" id="jobPosition" placeholder="Position Applying For" required>
+    <input type="text" id="jobCountry" placeholder="Country Applying For" required>
+
+    <label>Upload Passport Copy</label>
+    <input type="file" required>
+
+    <label>Upload Aadhaar Card Copy</label>
+    <input type="file" required>
+
+    <button type="submit" class="btn">Submit Application</button>
+  </form>
+
+  <div id="workerSuccess" style="display:none; margin-top:20px; color:#d4af37;">
+    OSTC will contact you within 48 hours.
+  </div>
+</section>
+
+<footer class="main-footer">
+
+  <div class="footer-container">
+
+    <!-- LEFT BRAND COLUMN -->
+    <div class="footer-brand">
+      <h3>On Service Travel Consultants</h3>
+      <p>Global Workforce Recruitment & Deployment</p>
+      <p>🇮🇳 Based in India, hiring globally</p>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li>Overseas Recruitment</li>
+        <li>Trade Testing</li>
+        <li>Visa Processing</li>
+        <li>Employer Workforce Solutions</li>
+        <li>Pre-Departure Orientation</li>
+      </ul>
+    </div>
+
+    <!-- INDUSTRIES -->
+    <div class="footer-col">
+      <h4>Industries</h4>
+      <ul>
+        <li>Construction</li>
+        <li>Manufacturing</li>
+        <li>Logistics</li>
+        <li>Automotive</li>
+        <li>Agriculture</li>
+      </ul>
+    </div>
+
+    <!-- COMPANY -->
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="countries.html">Countries</a></li>
+        <li><a href="jobs.html">Vacancies</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="footer-col footer-contact">
+      <h4>Contact</h4>
+
+      <div class="contact-row">
+        <div>
+          <strong>Email</strong>
+          <p><a href="mailto:info@onservicetravel.com">info@onservicetravel.com</a></p>
+        </div>
+
+        <div>
+          <strong>Phone</strong>
+          <p><a href="tel:+919624001714">+91 9624001714</a></p>
+        </div>
+      </div>
+
+      <div class="footer-address">
+        <strong>Head Office:</strong>
+        <p>
+          “Everest House”<br>
+          Between Mavdi Circle & Gondal Circle,<br>
+          150 Feet Ring Road,<br>
+          Rajkot – 360 004,<br>
+          Gujarat, India
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 On Service Travel Consultants (OSTC) | Ethical & Legal Overseas Recruitment
+  </div>
+
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+/* SAFE FORM HANDLING */
+document.addEventListener("DOMContentLoaded", function(){
+
+  const employerForm = document.getElementById("employerForm");
+  const workerForm = document.getElementById("workerForm");
+
+  if (employerForm) {
+    employerForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      document.getElementById("employerSuccess").style.display = "block";
+      employerForm.reset();
+    });
+  }
+
+  if (workerForm) {
+    workerForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      document.getElementById("workerSuccess").style.display = "block";
+      workerForm.reset();
+    });
+  }
+
+  /* AUTO-FILL FROM JOB BUTTON */
+  const savedCountry = localStorage.getItem("selectedCountry");
+  const savedJob = localStorage.getItem("selectedJob");
+
+  if (savedCountry) {
+    document.getElementById("jobCountry").value = savedCountry;
+  }
+
+  if (savedJob) {
+    document.getElementById("jobPosition").value = savedJob;
+  }
+
+});
+</script>
+
+</body>
+</html>
