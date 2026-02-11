@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* FILTER LAYOUT */
 .jobs-wrapper {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -32,7 +31,6 @@
   display: block;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 15px;
 }
 
 @media (max-width: 900px) {
@@ -63,84 +61,48 @@
 </section>
 
 <section>
-  <div class="jobs-wrapper">
+<div class="jobs-wrapper">
 
-    <!-- FILTER SIDEBAR -->
-    <div class="job-filter">
-      <h3>Filter by Country</h3>
+  <!-- FILTER -->
+  <div class="job-filter">
+    <h3>Filter by Country</h3>
 
-      <label>
-        <input type="checkbox" class="country-filter" value="Israel">
-        Israel
-      </label>
+    <label><input type="checkbox" class="country-filter" value="Israel"> Israel</label>
+    <label><input type="checkbox" class="country-filter" value="Germany"> Germany</label>
+    <label><input type="checkbox" class="country-filter" value="Poland"> Poland</label>
+    <label><input type="checkbox" class="country-filter" value="Czech Republic"> Czech Republic</label>
+    <label><input type="checkbox" class="country-filter" value="Malta"> Malta</label>
+  </div>
 
-      <label>
-        <input type="checkbox" class="country-filter" value="Czech Republic">
-        Czech Republic
-      </label>
+  <!-- JOB GRID -->
+  <div class="grid">
 
-      <label>
-        <input type="checkbox" class="country-filter" value="Malta">
-        Malta
-      </label>
-    </div>
+    <!-- ISRAEL JOBS -->
+    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Steel Fixer</h3><button class="btn" onclick="applyJob('Israel','Steel Fixer')">Apply Now</button></div>
+    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Car Mechanic</h3><button class="btn" onclick="applyJob('Israel','Car Mechanic')">Apply Now</button></div>
+    <div class="card job-card" data-country="Israel"><h3>🇮🇱 JCB Driver</h3><button class="btn" onclick="applyJob('Israel','JCB Driver')">Apply Now</button></div>
+    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Truck Driver</h3><button class="btn" onclick="applyJob('Israel','Truck Driver')">Apply Now</button></div>
+    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Carpenter</h3><button class="btn" onclick="applyJob('Israel','Carpenter')">Apply Now</button></div>
+    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Furniture Worker</h3><button class="btn" onclick="applyJob('Israel','Furniture Worker')">Apply Now</button></div>
+    <div class="card job-card" data-country="Israel"><h3>🇮🇱 General Worker</h3><button class="btn" onclick="applyJob('Israel','General Worker')">Apply Now</button></div>
+    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Construction Worker</h3><button class="btn" onclick="applyJob('Israel','Construction Worker')">Apply Now</button></div>
 
-    <!-- JOB GRID -->
-    <div class="grid">
+    <!-- GERMANY -->
+    <div class="card job-card" data-country="Germany"><h3>🇩🇪 Caregiver</h3><button class="btn" onclick="applyJob('Germany','Caregiver')">Apply Now</button></div>
 
-      <!-- FEATURED JOB -->
-      <div class="card job-card featured-job" data-country="Israel">
-        <div class="badge-new">FEATURED</div>
-        <h3>🇮🇱 Israel – Steel Fixer</h3>
-        <p><strong>Job ID:</strong> IL-SF-1024</p>
-        <p><strong>Salary:</strong> ₹1,50,000 – ₹1,80,000 per month</p>
-        <p class="slots">Only 12 positions left</p>
-        <p class="countdown" id="countdown1"></p>
-        <button class="btn" onclick="applyJob('Israel','Steel Fixer')">
-          Apply Now
-        </button>
-      </div>
+    <!-- POLAND -->
+    <div class="card job-card" data-country="Poland"><h3>🇵🇱 Warehouse Worker</h3><button class="btn" onclick="applyJob('Poland','Warehouse Worker')">Apply Now</button></div>
 
-      <!-- CAR MECHANIC -->
-      <div class="card job-card" data-country="Israel">
-        <h3>🇮🇱 Israel – Car Mechanic</h3>
-        <p><strong>Job ID:</strong> IL-CM-2041</p>
-        <p><strong>Salary:</strong> ₹1,20,000 – ₹1,60,000 per month</p>
-        <p class="slots">Only 8 positions left</p>
-        <p class="countdown" id="countdown2"></p>
-        <button class="btn" onclick="applyJob('Israel','Car Mechanic')">
-          Apply Now
-        </button>
-      </div>
+    <!-- CZECH -->
+    <div class="card job-card" data-country="Czech Republic"><h3>🇨🇿 Warehouse Worker</h3><button class="btn" onclick="applyJob('Czech Republic','Warehouse Worker')">Apply Now</button></div>
 
-      <!-- WAREHOUSE -->
-      <div class="card job-card" data-country="Czech Republic">
-        <h3>🇨🇿 Czech Republic – Warehouse Worker</h3>
-        <p><strong>Job ID:</strong> CZ-WH-3302</p>
-        <p><strong>Salary:</strong> €1,300 – €1,600 per month</p>
-        <p class="slots">Only 15 positions left</p>
-        <p class="countdown" id="countdown3"></p>
-        <button class="btn" onclick="applyJob('Czech Republic','Warehouse Worker')">
-          Apply Now
-        </button>
-      </div>
-
-      <!-- MALTA -->
-      <div class="card job-card" data-country="Malta">
-        <div class="badge-new">NEW</div>
-        <h3>🇲🇹 Malta – Car Body Sprayer</h3>
-        <p><strong>Job ID:</strong> MT-CB-4411</p>
-        <p><strong>Salary:</strong> €1,800 – €2,200 per month</p>
-        <p class="slots">Only 5 positions left</p>
-        <p class="countdown" id="countdown4"></p>
-        <button class="btn" onclick="applyJob('Malta','Car Body Sprayer')">
-          Apply Now
-        </button>
-      </div>
-
-    </div>
+    <!-- MALTA -->
+    <div class="card job-card" data-country="Malta"><h3>🇲🇹 Car Mechanic</h3><button class="btn" onclick="applyJob('Malta','Car Mechanic')">Apply Now</button></div>
+    <div class="card job-card" data-country="Malta"><h3>🇲🇹 Body Preparation / Car Body Fixing</h3><button class="btn" onclick="applyJob('Malta','Body Preparation Worker')">Apply Now</button></div>
 
   </div>
+
+</div>
 </section>
 
 <footer class="main-footer">
@@ -151,9 +113,8 @@
       <p>🇮🇳 Based in India, hiring globally</p>
     </div>
   </div>
-
   <div class="footer-bottom">
-    © 2026 On Service Travel Consultants (OSTC)
+    © 2026 OSTC
   </div>
 </footer>
 
@@ -164,23 +125,7 @@ function applyJob(country, job) {
   window.location.href = "contact.html";
 }
 
-/* Countdown */
-function setCountdown(elementId, deadline) {
-  const endDate = new Date(deadline).getTime();
-  const now = new Date().getTime();
-  const distance = endDate - now;
-  const days = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
-
-  document.getElementById(elementId).innerText =
-    "Application closes in " + days + " days";
-}
-
-setCountdown("countdown1", "2026-04-01");
-setCountdown("countdown2", "2026-03-02");
-setCountdown("countdown3", "2026-02-03");
-setCountdown("countdown4", "2026-02-02");
-
-/* FILTER SYSTEM */
+/* FILTER */
 const filters = document.querySelectorAll('.country-filter');
 const jobCards = document.querySelectorAll('.job-card');
 
