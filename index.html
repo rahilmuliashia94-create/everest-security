@@ -1,89 +1,228 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Code Anime Girl</title>
-<style>
-body {
-  margin: 0;
-  background: radial-gradient(circle at center, #111, #000);
-  overflow: hidden;
-}
-canvas {
-  display: block;
-}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSTC | Overseas Workforce Deployment</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<canvas id="canvas"></canvas>
+<header>
+  <div class="logo">OSTC</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="countries.html">Countries</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
 
-<script>
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <h1>Legal, Ethical & Government-Compliant Overseas Recruitment</h1>
+    <p>
+      On Service Travel Consultants (OSTC) is a Government of India–authorized overseas manpower recruitment firm,
+      placing skilled, semi-skilled, and professional Indian workers into verified international markets.
+    </p>
+    <a href="contact.html" class="btn">Apply for Overseas Opportunities</a>
+  </div>
+</section>
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+<!-- TRUST COUNTERS -->
+<section class="section reveal">
+  <h2>Our Global Impact</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="counter" data-target="10000">0</div>
+      <p>Workers Deployed</p>
+    </div>
+    <div class="card">
+      <div class="counter" data-target="15">0</div>
+      <p>Countries Served</p>
+    </div>
+    <div class="card">
+      <div class="counter" data-target="100">0</div>
+      <p>% Legal Recruitment Compliance</p>
+    </div>
+  </div>
+</section>
 
-let time = 0;
-let blinkTimer = 0;
+<!-- 5 STEP PROCESS -->
+<section class="section reveal">
+  <h2>Our 5-Step Overseas Recruitment Process</h2>
 
-function drawCharacter() {
-  const centerX = canvas.width / 2;
-  const centerY = canvas.height / 2 + Math.sin(time * 0.02) * 10;
+  <div class="timeline">
 
-  // Aura glow
-  ctx.beginPath();
-  ctx.arc(centerX, centerY, 140, 0, Math.PI * 2);
-  ctx.fillStyle = "rgba(120, 0, 255, 0.15)";
-  ctx.fill();
+    <div class="step card">
+      <h3>Step 1: Inquiry & Eligibility Check</h3>
+      <p>
+        Candidates or employers initiate contact via website, phone, WhatsApp, or office visit.
+        We assess eligibility, skill profile, passport status, and country suitability.
+        No commitments. No fees. No pressure.
+      </p>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
 
-  // Hair sway
-  const hairOffset = Math.sin(time * 0.05) * 8;
+    <div class="step card">
+      <h3>Step 2: Selection & Trade Assessment</h3>
+      <p>
+        Shortlisting based on trade skills, experience, and employer requirements.
+        Includes practical trade testing, interviews, and employer approval.
+        Only selected candidates proceed.
+      </p>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
 
-  // Hair
-  ctx.beginPath();
-  ctx.arc(centerX, centerY - 60, 100 + hairOffset, Math.PI, 2 * Math.PI);
-  ctx.fillStyle = "#2b0066";
-  ctx.fill();
+    <div class="step card">
+      <h3>Step 3: Documentation & Legal Compliance</h3>
+      <p>
+        Passport verification, experience validation, embassy-approved medical test,
+        Police Clearance Certificate, and contract explanation.
+        Every document is verified and explained clearly.
+      </p>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
 
-  // Face
-  ctx.beginPath();
-  ctx.arc(centerX, centerY, 80, 0, Math.PI * 2);
-  ctx.fillStyle = "#ffe0bd";
-  ctx.fill();
+    <div class="step card">
+      <h3>Step 4: Visa Stamping & Final Approval</h3>
+      <p>
+        Work permit approval, embassy appointment, biometric submission (if required),
+        and stamped work visa confirmation.
+        No candidate travels without a legal stamped work visa.
+      </p>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
 
-  // Eyes
-  blinkTimer++;
-  let eyeHeight = blinkTimer % 200 > 180 ? 2 : 20;
+    <div class="step card">
+      <h3>Step 5: Flight Booking & Departure</h3>
+      <p>
+        Flight booking, pre-departure orientation, employer details provided,
+        accommodation briefing, and organized airport deployment.
+        Legal, transparent, and fully informed migration.
+      </p>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
 
-  ctx.fillStyle = "black";
+  </div>
+</section>
 
-  ctx.beginPath();
-  ctx.ellipse(centerX - 30, centerY - 10, 12, eyeHeight, 0, 0, Math.PI * 2);
-  ctx.fill();
+<!-- WHY CHOOSE OSTC -->
+<section class="section reveal">
+  <h2>Why Employers & Candidates Choose OSTC</h2>
 
-  ctx.beginPath();
-  ctx.ellipse(centerX + 30, centerY - 10, 12, eyeHeight, 0, 0, Math.PI * 2);
-  ctx.fill();
+  <div class="grid">
 
-  // Mouth
-  ctx.beginPath();
-  ctx.arc(centerX, centerY + 30, 15, 0, Math.PI);
-  ctx.strokeStyle = "black";
-  ctx.lineWidth = 3;
-  ctx.stroke();
-}
+    <div class="card">
+      <h3>Government Compliance</h3>
+      <p>
+        Operates under Indian Emigration Act regulations and destination-country labor laws.
+        Contract-verified. Embassy-compliant. Fully documented.
+      </p>
+    </div>
 
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawCharacter();
-  time++;
-  requestAnimationFrame(animate);
-}
+    <div class="card">
+      <h3>Zero Exploitation Policy</h3>
+      <p>
+        No fake job offers. No illegal brokerage. No document confiscation.
+        Every candidate receives a written contract and salary transparency.
+      </p>
+    </div>
 
-animate();
-</script>
+    <div class="card">
+      <h3>In-House Trade Testing (Rajkot)</h3>
+      <p>
+        Skill validation, safety training, language orientation,
+        and worksite behavior preparation before deployment.
+      </p>
+    </div>
 
+    <div class="card">
+      <h3>End-to-End Recruitment Model</h3>
+      <p>
+        From sourcing and employer liaison to visa processing,
+        departure handling, and post-arrival coordination.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="main-footer">
+
+  <div class="footer-container">
+
+    <!-- BRAND -->
+    <div class="footer-col">
+      <h3>On Service Travel Consultants (OSTC)</h3>
+      <p>Global Workforce Recruitment & Deployment</p>
+      <p>🇮🇳 Based in India, hiring globally</p>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li>Overseas Recruitment</li>
+        <li>Trade Testing & Skill Assessment</li>
+        <li>Visa Processing & Documentation</li>
+        <li>Employer Workforce Solutions</li>
+        <li>Pre-Departure Orientation</li>
+      </ul>
+    </div>
+
+    <!-- INDUSTRIES -->
+    <div class="footer-col">
+      <h4>Industries</h4>
+      <ul>
+        <li>Construction & Infrastructure</li>
+        <li>Manufacturing & Factory Operations</li>
+        <li>Logistics & Warehousing</li>
+        <li>Automotive & Technical Trades</li>
+        <li>Agriculture & Dairy</li>
+      </ul>
+    </div>
+
+    <!-- COMPANY -->
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="countries.html">Countries</a></li>
+        <li><a href="jobs.html">Vacancies</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:info@onservicetravel.com">info@onservicetravel.com</a></p>
+      <p>Phone: <a href="tel:+919624001714">+91 9624001714</a></p>
+      <p><strong>Head Office:</strong></p>
+      <p>
+        “Everest House”<br>
+        Between Mavdi Circle & Gondal Circle,<br>
+        150 Feet Ring Road,<br>
+        Rajkot – 360 004,<br>
+        Gujarat, India
+      </p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 On Service Travel Consultants (OSTC) | Ethical & Legal Overseas Recruitment
+  </div>
+
+</footer>
+
+<a href="contact.html" class="sticky-cta">Apply Now</a>
+<a href="https://wa.me/0000000000" class="whatsapp">W</a>
+
+<script src="script.js"></script>
 </body>
 </html>
