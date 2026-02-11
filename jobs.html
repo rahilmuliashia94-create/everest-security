@@ -33,6 +33,41 @@
   cursor: pointer;
 }
 
+.clear-btn {
+  margin-top: 15px;
+  padding: 8px 14px;
+  border: 1px solid #d4af37;
+  background: transparent;
+  color: #d4af37;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.clear-btn:hover {
+  background: #d4af37;
+  color: #000;
+}
+
+.job-count {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #d4af37;
+}
+
+.fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: 0.3s ease;
+  pointer-events: none;
+}
+
+.fade-in {
+  opacity: 1;
+  transform: scale(1);
+  transition: 0.3s ease;
+}
+
 @media (max-width: 900px) {
   .jobs-wrapper {
     grid-template-columns: 1fr;
@@ -72,34 +107,40 @@
     <label><input type="checkbox" class="country-filter" value="Poland"> Poland</label>
     <label><input type="checkbox" class="country-filter" value="Czech Republic"> Czech Republic</label>
     <label><input type="checkbox" class="country-filter" value="Malta"> Malta</label>
+
+    <button class="clear-btn" id="clearFilters">Clear Filters</button>
   </div>
 
   <!-- JOB GRID -->
-  <div class="grid">
+  <div>
+    <div class="job-count" id="jobCount"></div>
 
-    <!-- ISRAEL JOBS -->
-    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Steel Fixer</h3><button class="btn" onclick="applyJob('Israel','Steel Fixer')">Apply Now</button></div>
-    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Car Mechanic</h3><button class="btn" onclick="applyJob('Israel','Car Mechanic')">Apply Now</button></div>
-    <div class="card job-card" data-country="Israel"><h3>🇮🇱 JCB Driver</h3><button class="btn" onclick="applyJob('Israel','JCB Driver')">Apply Now</button></div>
-    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Truck Driver</h3><button class="btn" onclick="applyJob('Israel','Truck Driver')">Apply Now</button></div>
-    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Carpenter</h3><button class="btn" onclick="applyJob('Israel','Carpenter')">Apply Now</button></div>
-    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Furniture Worker</h3><button class="btn" onclick="applyJob('Israel','Furniture Worker')">Apply Now</button></div>
-    <div class="card job-card" data-country="Israel"><h3>🇮🇱 General Worker</h3><button class="btn" onclick="applyJob('Israel','General Worker')">Apply Now</button></div>
-    <div class="card job-card" data-country="Israel"><h3>🇮🇱 Construction Worker</h3><button class="btn" onclick="applyJob('Israel','Construction Worker')">Apply Now</button></div>
+    <div class="grid">
 
-    <!-- GERMANY -->
-    <div class="card job-card" data-country="Germany"><h3>🇩🇪 Caregiver</h3><button class="btn" onclick="applyJob('Germany','Caregiver')">Apply Now</button></div>
+      <!-- ISRAEL -->
+      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Steel Fixer</h3><button class="btn" onclick="applyJob('Israel','Steel Fixer')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Car Mechanic</h3><button class="btn" onclick="applyJob('Israel','Car Mechanic')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 JCB Driver</h3><button class="btn" onclick="applyJob('Israel','JCB Driver')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Truck Driver</h3><button class="btn" onclick="applyJob('Israel','Truck Driver')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Carpenter</h3><button class="btn" onclick="applyJob('Israel','Carpenter')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Furniture Worker</h3><button class="btn" onclick="applyJob('Israel','Furniture Worker')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 General Worker</h3><button class="btn" onclick="applyJob('Israel','General Worker')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Israel"><h3>🇮🇱 Construction Worker</h3><button class="btn" onclick="applyJob('Israel','Construction Worker')">Apply Now</button></div>
 
-    <!-- POLAND -->
-    <div class="card job-card" data-country="Poland"><h3>🇵🇱 Warehouse Worker</h3><button class="btn" onclick="applyJob('Poland','Warehouse Worker')">Apply Now</button></div>
+      <!-- GERMANY -->
+      <div class="card job-card fade-in" data-country="Germany"><h3>🇩🇪 Caregiver</h3><button class="btn" onclick="applyJob('Germany','Caregiver')">Apply Now</button></div>
 
-    <!-- CZECH -->
-    <div class="card job-card" data-country="Czech Republic"><h3>🇨🇿 Warehouse Worker</h3><button class="btn" onclick="applyJob('Czech Republic','Warehouse Worker')">Apply Now</button></div>
+      <!-- POLAND -->
+      <div class="card job-card fade-in" data-country="Poland"><h3>🇵🇱 Warehouse Worker</h3><button class="btn" onclick="applyJob('Poland','Warehouse Worker')">Apply Now</button></div>
 
-    <!-- MALTA -->
-    <div class="card job-card" data-country="Malta"><h3>🇲🇹 Car Mechanic</h3><button class="btn" onclick="applyJob('Malta','Car Mechanic')">Apply Now</button></div>
-    <div class="card job-card" data-country="Malta"><h3>🇲🇹 Body Preparation / Car Body Fixing</h3><button class="btn" onclick="applyJob('Malta','Body Preparation Worker')">Apply Now</button></div>
+      <!-- CZECH -->
+      <div class="card job-card fade-in" data-country="Czech Republic"><h3>🇨🇿 Warehouse Worker</h3><button class="btn" onclick="applyJob('Czech Republic','Warehouse Worker')">Apply Now</button></div>
 
+      <!-- MALTA -->
+      <div class="card job-card fade-in" data-country="Malta"><h3>🇲🇹 Car Mechanic</h3><button class="btn" onclick="applyJob('Malta','Car Mechanic')">Apply Now</button></div>
+      <div class="card job-card fade-in" data-country="Malta"><h3>🇲🇹 Body Preparation / Car Body Fixing</h3><button class="btn" onclick="applyJob('Malta','Body Preparation Worker')">Apply Now</button></div>
+
+    </div>
   </div>
 
 </div>
@@ -113,9 +154,7 @@
       <p>🇮🇳 Based in India, hiring globally</p>
     </div>
   </div>
-  <div class="footer-bottom">
-    © 2026 OSTC
-  </div>
+  <div class="footer-bottom">© 2026 OSTC</div>
 </footer>
 
 <script>
@@ -125,29 +164,46 @@ function applyJob(country, job) {
   window.location.href = "contact.html";
 }
 
-/* FILTER */
 const filters = document.querySelectorAll('.country-filter');
 const jobCards = document.querySelectorAll('.job-card');
+const jobCount = document.getElementById('jobCount');
+const clearBtn = document.getElementById('clearFilters');
+
+function updateCount() {
+  const visible = Array.from(jobCards).filter(card => card.style.display !== "none");
+  jobCount.innerText = visible.length + " Positions Available";
+}
+
+function applyFilters() {
+  const selected = Array.from(filters)
+    .filter(f => f.checked)
+    .map(f => f.value);
+
+  jobCards.forEach(card => {
+    const country = card.getAttribute('data-country');
+
+    if (selected.length === 0 || selected.includes(country)) {
+      card.style.display = "block";
+      setTimeout(() => card.classList.remove('fade-out'), 10);
+    } else {
+      card.classList.add('fade-out');
+      setTimeout(() => card.style.display = "none", 200);
+    }
+  });
+
+  setTimeout(updateCount, 250);
+}
 
 filters.forEach(filter => {
-  filter.addEventListener('change', () => {
-
-    const selected = Array.from(filters)
-      .filter(f => f.checked)
-      .map(f => f.value);
-
-    jobCards.forEach(card => {
-      const country = card.getAttribute('data-country');
-
-      if (selected.length === 0 || selected.includes(country)) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
-
-  });
+  filter.addEventListener('change', applyFilters);
 });
+
+clearBtn.addEventListener('click', () => {
+  filters.forEach(f => f.checked = false);
+  applyFilters();
+});
+
+updateCount();
 </script>
 
 </body>
