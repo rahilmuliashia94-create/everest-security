@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSTC | Overseas Workforce Deployment</title>
 <link rel="stylesheet" href="style.css">
+
+<script>
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+</script>
 </head>
 <body>
 
@@ -17,10 +23,10 @@
     <a href="countries.html">Countries</a>
     <a href="jobs.html">Jobs</a>
     <a href="contact.html">Contact</a>
+    <button id="theme-toggle" class="btn" style="padding: 5px 12px; margin-left: 15px; cursor: pointer; min-width: 45px;">🌙</button>
   </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div>
     <h1>Legal, Ethical & Government-Compliant Overseas Recruitment</h1>
@@ -32,7 +38,6 @@
   </div>
 </section>
 
-<!-- TRUST COUNTERS -->
 <section class="section reveal">
   <h2>Our Global Impact</h2>
   <div class="grid">
@@ -51,7 +56,6 @@
   </div>
 </section>
 
-<!-- 5 STEP PROCESS -->
 <section class="section reveal">
   <h2>Our 5-Step Overseas Recruitment Process</h2>
 
@@ -110,7 +114,6 @@
   </div>
 </section>
 
-<!-- WHY CHOOSE OSTC -->
 <section class="section reveal">
   <h2>Why Employers & Candidates Choose OSTC</h2>
 
@@ -155,14 +158,12 @@
 
   <div class="footer-container">
 
-    <!-- BRAND -->
     <div class="footer-col">
       <h3>On Service Travel Consultants (OSTC)</h3>
       <p>Global Workforce Recruitment & Deployment</p>
       <p>🇮🇳 Based in India, hiring globally</p>
     </div>
 
-    <!-- SERVICES -->
     <div class="footer-col">
       <h4>Services</h4>
       <ul>
@@ -174,7 +175,6 @@
       </ul>
     </div>
 
-    <!-- INDUSTRIES -->
     <div class="footer-col">
       <h4>Industries</h4>
       <ul>
@@ -186,7 +186,6 @@
       </ul>
     </div>
 
-    <!-- COMPANY -->
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
@@ -197,7 +196,6 @@
       </ul>
     </div>
 
-    <!-- CONTACT -->
     <div class="footer-col">
       <h4>Contact</h4>
       <p>Email: <a href="mailto:info@onservicetravel.com">info@onservicetravel.com</a></p>
@@ -221,7 +219,7 @@
 </footer>
 
 <a href="contact.html" class="sticky-cta">Apply Now</a>
-<a href="https://wa.me/0000000000" class="whatsapp">W</a>
+<a href="https://wa.me/919624001714" class="whatsapp">W</a>
 
 <script src="script.js"></script>
 </body>
