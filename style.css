@@ -1,4 +1,53 @@
 /* ================================
+   THEME VARIABLES
+================================ */
+:root {
+  --bg-body: #f5f7fa;
+  --bg-header: #ffffff;
+  --text-main: #1f1f1f;
+  --card-inner: #ffffff;
+  --border-light: #e5e5e5;
+  --footer-bg: #0a0a0a;
+}
+
+[data-theme="dark"] {
+  --bg-body: #121212;
+  --bg-header: #1a1a1a;
+  --text-main: #e0e0e0;
+  --card-inner: #1e1e1e;
+  --border-light: #333333;
+}
+
+/* Apply Variables to your existing code */
+body {
+  background: var(--bg-body) !important;
+  color: var(--text-main) !important;
+  transition: 0.3s ease;
+}
+
+header {
+  background: var(--bg-header) !important;
+  border-bottom: 1px solid var(--border-light) !important;
+}
+
+nav a {
+  color: var(--text-main) !important;
+}
+
+/* Maintaining your Gold Glow Card in Dark Mode */
+.card::after {
+  background: var(--card-inner) !important; /* This changes the card center to dark */
+}
+
+.accordion-header {
+  background: var(--card-inner) !important;
+  border: 1px solid var(--border-light) !important;
+}
+
+.accordion-content {
+  background: var(--bg-body) !important;
+}
+/* ================================
    OSTC LIGHT + STRONG GOLD GLOW
 ================================ */
 
