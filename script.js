@@ -128,6 +128,58 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         content.style.maxHeight = content.scrollHeight + "px";
       }
+
+       // ===== OSTC Employer Reviews rotation (10s each) =====
+(function(){
+  const container = document.querySelector('.ostc-reviews');
+  if(!container) return;
+
+  const reviews = Array.from(container.querySelectorAll('.review'));
+  if(!reviews.length) return;
+
+  const INTERVAL = 10000; // 10 seconds
+  let idx = reviews.findIndex(r => r.classList.contains('active'));
+  if(idx === -1) idx = 0;
+
+  // ensure only one active at start
+  reviews.forEach((r, i) => {
+    r.classList.toggle('active', i === idx);
+    r.setAttribute('aria-hidden', i === idx ? 'false' : 'true');
+  });
+
+  let timer = null;
+  function show(i){
+    reviews.forEach((r, n) => {
+      r.classList.toggle('active', n === i);
+      r.setAttribute('aria-hidden', n === i ? 'false' : 'true');
+    });
+  }
+
+  function next(){
+    idx = (idx + 1) % reviews.length;
+    show(idx);
+  }
+
+  function start(){
+    stop();
+    timer = setInterval(next, INTERVAL);
+  }
+  function stop(){
+    if(timer){ clearInterval(timer); timer = null; }
+  }
+
+  // Pause rotation when page isn't visible
+  document.addEventListener('visibilitychange', () => {
+    if(document.hidden) stop(); else start();
+  });
+
+  // Start after DOM ready or immediately if already ready
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', () => { start(); });
+  } else {
+    start();
+  }
+})();
     });
   });
 
